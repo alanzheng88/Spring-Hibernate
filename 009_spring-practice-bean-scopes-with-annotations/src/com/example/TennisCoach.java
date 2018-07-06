@@ -1,22 +1,19 @@
 package com.example;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope("singleton")
+@PropertySource("classpath:sport.properties")
 public class TennisCoach implements Coach, InitializingBean {
 
 	// field injection
 	@Autowired
-	@Qualifier("randomFortuneService")
+	@Qualifier("fileFortuneService")
 	private FortuneService fortuneService;
 	
 	@Value("${alan.email}")
@@ -27,16 +24,6 @@ public class TennisCoach implements Coach, InitializingBean {
 	
 	public TennisCoach() {
 		System.out.println(">> inside default constructor");
-	}
-	
-	@PostConstruct
-	public void doMyStartupStuff() {
-		System.out.println(">> inside doMyStartupStuff");
-	}
-	
-	@PreDestroy
-	public void doMyCleanupStuff() {
-		System.out.println(">> inside doMyCleanupStuff");
 	}
 	
 	/*
